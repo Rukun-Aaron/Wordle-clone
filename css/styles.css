@@ -1,0 +1,172 @@
+.header > h1{
+    text-align: center;
+    letter-spacing: .025em;
+    font-weight: 700;
+    --tw-border-opacity: 1;
+    border-color: rgb(229 231 235/var(--tw-border-opacity));
+    border-bottom-width: 5px;
+}
+body{
+    color:#eee;
+    background: #121212; 
+
+}
+
+#game-board{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.letter-row{
+    display: flex;
+}
+
+.letter-box {
+    border: 2px solid gray;
+    border-radius: 10px;
+    margin: 2px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    color : cyan
+    
+  }
+
+#keyboard{
+    display: flex;
+    align-items: center;
+    flex-direction: column ;
+    margin: 1rem 0;
+    
+}
+  
+#keyboard > div {
+    display: flex;
+    margin: 0.5rem 0;
+  }
+
+div#keyboard > div:nth-child(2), div#keyboard >div:nth-child(4){
+    margin:0.5rem 0;
+}
+#second-row{
+    margin: 2px;
+}
+.keyboard-button{
+    font-size: 1rem;
+    font-weight: 800;
+    padding :0.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 0 2px;
+}
+
+.spacebar{
+    font-size: 1rem;
+    font-weight: 800;
+    width: 250px;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+#myInput:active,#myInput.active,.keyboard-button:active{
+    transform: scale(0.9);
+    background-color: royalblue;
+
+}
+$colors: #b71234, #ff5800, #ffd500, #009b48, #0046ad, #cecece;
+$sides: front, back, right, left, top, bottom;
+$repeat: 50;
+
+html, body {
+  width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  background: #140c20;
+}
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  perspective: 700px;
+  top: calc(50% - 100px);
+  left: calc(50% - 100px);
+}
+.rubiks-cube {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform-style: preserve-3d;
+  transition: transform 1s ease;
+  background: black;
+}
+
+.cube-side {
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+  position: absolute;
+  backface-visibility: hidden;
+  background: black;
+  border-radius: 7px;
+}
+
+@for $j from 1 through length($sides) {
+  @for $i from 1 through $repeat {
+    .cube-side:nth-of-type(#{$j}) .cube-side-square:nth-of-type(#{length($colors)}n
+        + #{$i}) {
+      background: nth($colors, random(length($colors)));
+    }
+  }
+}
+.cube-side .cube-side-square {
+  display: inline-block;
+  border: 6px solid;
+  width: 33%;
+  height: 33%;
+  border-radius: 12px;
+}
+
+
+.cube-side.side-front {
+  transform: translateZ(100px);
+}
+.cube-side.side-back {
+  transform: rotateX(-180deg) translateZ(100px);
+}
+.cube-side.side-right {
+  transform: rotateY(90deg) translateZ(100px);
+}
+.cube-side.side-left {
+  transform: rotateY(-90deg) translateZ(100px);
+}
+.cube-side.side-top {
+  transform: rotateX(90deg) translateZ(100px);
+}
+.cube-side.side-bottom {
+  transform: rotateX(-90deg) translateZ(100px);
+}
+
+.rubiks-cube {
+  animation: rubiksCubeRotate 20s linear infinite both alternate;
+}
+
+  @keyframes rubiksCubeRotate {
+    0%       { transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg); }
+    15%      { transform: rotateZ(45deg) rotateX(45deg) rotateY(45deg); }
+    30%      { transform: rotateZ(45deg) rotateX(90deg) rotateY(90deg); }
+    45%      { transform: rotateZ(45deg) rotateX(135deg) rotateY(135deg); }
+    60%      { transform: rotateZ(45deg) rotateX(90deg) rotateY(180deg);  }
+    75%      { transform: rotateZ(45deg) rotateX(45deg) rotateY(225deg); }
+    100%      { transform: rotateZ(45deg) rotateX(0deg) rotateY(270deg); }
+  }
